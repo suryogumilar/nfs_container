@@ -48,24 +48,30 @@ yum install net-tools -y
 yum install telnet -y
 ```
 
-### Ubuntu client (jdk)
+### Ubuntu client 
 
 
-still failed with err `mount.nfs: Protocol not supported`:   
+do:  
 
-```
+```bash
+### install parts
 apt-get update
-apt-get install nfs-common
+apt-get install -y nfs-common netbase
 
+
+### exec nfs rpcbind parts
 update-rc.d rpcbind enable
 update-rc.d nfs-common enable
 service rpcbind restart
 service nfs-common start
 
+
+### mount 
 mkdir /mnt/tes
 mount nfs_service:/var/nfsshare /mnt/tes
-mount -vvvv -t nfs -o vers=3 nfs_service:/var/nfsshare /mnt/tes
 
+### other mount options
+mount -vvvv -t nfs -o vers=3 nfs_service:/var/nfsshare /mnt/tes
 mount -vvvv -t nfs -o nolock nfs_service:/var/nfsshare /mnt/tes
 ```
 
@@ -99,13 +105,11 @@ mount -vvvv -o vers=3 -t nfs nfs_service:/var/nfsshare /mnt/tes/
 mount -vvvv -t nfs -o nolock nfs_service:/var/nfsshare /mnt/tes
 ```
 
-#### need investigate?
-
-/etc/hosts.allow
 
 
 #### ref
 
+ - https://github.com/rancher/os/issues/1601
  - https://github.com/mnagy/nfs-server
  - https://www.youtube.com/watch?v=c3dL0ULEH-s
  - https://github.com/ErezHorev/dockerized_nfs_server
