@@ -2,6 +2,7 @@ FROM ibmjava:8-sdk
 RUN apt-get update
 RUN apt-get install -y netbase telnet inetutils-ping
 RUN apt-get install -y nfs-common 
+COPY java.security /opt/ibm/java/jre/lib/security/java.security
 COPY run_container.sh /usr/local/bin/run_container.sh
 RUN chmod 755 /usr/local/bin/run_container.sh
 RUN apt-get clean autoremove

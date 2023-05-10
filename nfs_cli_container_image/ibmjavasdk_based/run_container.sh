@@ -35,15 +35,15 @@ echo "- Nfs client is up and running.."
 
 ##In short, exec "$@" will run the command given by the command line parameters in such a way that the current process is replaced by it (if the exec is able to execute the command at all).
 
-exec "$@"
+#exec "$@"
 
 #echo "args: $@"
 
-#if [ -z "$@" ]
-#then
-#    echo "execute $@"
-#    exec "$@"
-#else
+if [ -z "$@" ]
+then
     ## Run forever
-#    sleep infinity
-#fi
+    sleep infinity    
+else
+    echo "execute $@"
+    exec "$@"
+fi
